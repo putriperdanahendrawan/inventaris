@@ -51,9 +51,6 @@
                         <div class="form-group">
                         <label for="">Alasan</label>
                         <input type="text" name="alasan" class="form-control @error('alasan') is-invalid @enderror">
-                          {{-- <option value="">-- Pilih Alasan -- </option>
-                          <option value="Barang Rusak">Barang Rusak</option>
-                          <option value="Barang Dijual">Barang Dijual</option> --}}
                           @error('alasan')
                           <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

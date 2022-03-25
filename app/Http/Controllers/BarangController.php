@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
 use Alert;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BarangController extends Controller
 {
@@ -47,26 +47,25 @@ class BarangController extends Controller
         //     'merek' => 'required',
         // ]);
 
-          $rules = [
-          'merek' => 'required|max:255|unique:barangs',
-          'nama_barang' => 'required|max:255',
-          'kategori_barang' => 'required',
+        $rules = [
+            'merek' => 'required|max:255|unique:barangs',
+            'nama_barang' => 'required|max:255',
+            'kategori_barang' => 'required',
         ];
 
         $message = [
-        'merek.required' => 'Merek harus diisi',
-        'merek.unique' =>'Merek sudah digunakan',
-        'merek.max' => 'Merek maksimal 255 karakter',
-        'nama_barang.required' => 'Nama Barang harus diisi',
-        'nama_barang.max' => 'Nama Barang maksimal 255 karakter',
-        'kategori_barang.required' => 'Kategori Barang harus dipilih',
-];
-       $validation = Validator::make($request->all(), $rules, $message);
+            'merek.required' => 'Merek harus diisi',
+            'merek.unique' => 'Merek sudah digunakan',
+            'merek.max' => 'Merek maksimal 255 karakter',
+            'nama_barang.required' => 'Nama Barang harus diisi',
+            'nama_barang.max' => 'Nama Barang maksimal 255 karakter',
+            'kategori_barang.required' => 'Kategori Barang harus dipilih',
+        ];
+        $validation = Validator::make($request->all(), $rules, $message);
         if ($validation->fails()) {
-        Alert::error('Gagal', 'Data yang di masukan terjadi kesalahan, silahkan diulang')->autoclose(2000);
-        return back()->withErrors($validation)->withInput();
-}
-
+            Alert::error('Gagal', 'Data yang di masukan terjadi kesalahan, silahkan diulang')->autoclose(2000);
+            return back()->withErrors($validation)->withInput();
+        }
 
         $barang = new Barang;
         $barang->nama_barang = $request->nama_barang;
@@ -77,7 +76,6 @@ class BarangController extends Controller
         Alert::success('Berhasil', 'Data yang diinput sudah tersimpan');
         return redirect()->route('barang.index');
     }
-
 
     /**
      * Display the specified resource.
@@ -112,10 +110,10 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $rules = [
-        'merek' => 'required|max:255',
-        'nama_barang' => 'required|max:255|unique:barangs',
-        'kategori_barang' => 'required',
+        $rules = [
+            'merek' => 'required|max:255',
+            'nama_barang' => 'required|max:255|unique:barangs',
+            'kategori_barang' => 'required',
         ];
 
         $message = [
@@ -156,6 +154,8 @@ class BarangController extends Controller
             return redirect()->back();
         }
         Alert::success('Selamat', 'Data sudah dihapus');
+        return redirect()->route('barang.index');
+        $barang->delete();
         return redirect()->route('barang.index');
     }
 }
