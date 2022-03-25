@@ -46,13 +46,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('user-management', UserController::class);
     Route::resource('bmasuk', BarangmasukController::class);
     Route::resource('bkeluar', BarangkeluarController::class);
-    Route::resource('pinjam', PeminjamController::class)
-        ->middleware(['role:petugas|admin']);
-    Route::resource('kembali', PengembalianController::class)
-        ->middleware(['role:petugas|admin']);
+    Route::resource('pinjam', PeminjamController::class);
+    Route::resource('kembali', PengembalianController::class);
     Route::get('cetak-laporan', [LaporanController::class, 'form']);
     Route::post('view', [LaporanController::class, 'view'])->name('view.view');
     Route::get('view', [LaporanController::class, 'cetak'])->name('view.cetak');
     Route::post('cetak', [LaporanController::class, 'laporan'])->name('cetak.laporan');
-    Route::get('/Dashoard', [App\Http\Controllers\DashboardController::class, 'index'])->name('Dashboard');
+    Route::get('/Dashoard', [DashboardController::class, 'index'])->name('Dashboard');
 });

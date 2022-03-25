@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 @php $no=1; @endphp
-                                @foreach ($pengembalian as $data)
+                                @foreach ($kembali as $data)
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>

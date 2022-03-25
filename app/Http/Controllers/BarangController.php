@@ -48,17 +48,18 @@ class BarangController extends Controller
         // ]);
 
         $rules = [
-            'merek' => 'required|max:255|unique:barangs',
             'nama_barang' => 'required|max:255',
+            'merek' => 'required|max:255|unique:barangs',
             'kategori_barang' => 'required',
         ];
 
         $message = [
+            'nama_barang.required' => 'Nama Barang harus diisi',
+            'nama_barang.max' => 'Nama Barang maksimal 255 karakter',
             'merek.required' => 'Merek harus diisi',
             'merek.unique' => 'Merek sudah digunakan',
             'merek.max' => 'Merek maksimal 255 karakter',
-            'nama_barang.required' => 'Nama Barang harus diisi',
-            'nama_barang.max' => 'Nama Barang maksimal 255 karakter',
+
             'kategori_barang.required' => 'Kategori Barang harus dipilih',
         ];
         $validation = Validator::make($request->all(), $rules, $message);

@@ -19,8 +19,8 @@ class PengembalianController extends Controller
     public function index()
     {
         //
-        $pengembalian = Pengembalian::all();
-        return view('admin.kembali.index', compact('pengembalian'));
+        $kembali = Pengembalian::all();
+        return view('admin.kembali.index', compact('kembali'));
     }
 
     /**
@@ -85,14 +85,13 @@ class PengembalianController extends Controller
             $kembali->tgl_kembali = $request->tgl_kembali;
             $kembali->status = $request->status;
             $kembali->save();
-            Alert::success('Berhasil', 'Data yang diinput telah tersimpan');
-
             $barang->jumlah_stok += $request->jumlah_kembali;
             $pinjam->jumlah_pinjam -= $request->jumlah_kembali;
             $barang->save();
             $pinjam->save();
+            return redirect()->route('kembali.index');
+            Alert::success('Berhasil', 'Data yang diinput telah tersimpan');
         }
-        return redirect()->route('kembali.index');
 
     }
 
